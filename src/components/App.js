@@ -3,12 +3,21 @@ import '../styles/App.scss';
 
 function App() {
   const [errors, setErrors] = useState(0);
+  const [lastLetter, setLastLetter] = useState(['']);
 
   const handleClick = (ev) => {
     ev.preventDefault();
     setErrors(errors + 1);
   };
 
+  const handleLetter = (ev) => {
+    ev.preventDefault();
+    setLastLetter(ev.currentTarget.value);
+    if (ev.currentTarget.value.search(/[a-zñA-ZÑÁÉÓÍÚáéíóú]/) === -1) {
+      // Letra mala
+      setLastLetter('');
+    }
+  };
   return (
     <div className='page'>
       <header>
@@ -52,6 +61,8 @@ function App() {
               type='text'
               name='last-letter'
               id='last-letter'
+              onChange={handleLetter}
+              value={lastLetter}
             />
             <button onClick={handleClick}>Incrementar</button>
           </form>
