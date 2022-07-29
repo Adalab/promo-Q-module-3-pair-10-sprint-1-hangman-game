@@ -4,6 +4,7 @@ import '../styles/App.scss';
 function App() {
   const [errors, setErrors] = useState(0);
   const [lastLetter, setLastLetter] = useState(['']);
+  const [ word , setWord ]= useState ("katakroker")
 
   const handleClick = (ev) => {
     ev.preventDefault();
@@ -18,8 +19,15 @@ function App() {
       setLastLetter('');
     }
   };
-  return (
-    <div className='page'>
+
+  const renderSolutionLetters = ()=> {
+    const setWord = word.split("");
+    const htmli= setWord.map((wordItem,index)=> {return  <li className= 'letter' key = {index}> {wordItem} </li>})
+    return htmli;
+  
+
+  };
+  return  <div className='page'>
       <header>
         <h1 className='header__title'>Juego del ahorcado</h1>
       </header>
@@ -28,7 +36,13 @@ function App() {
           <div className='solution'>
             <h2 className='title'>Solución:</h2>
             <ul className='letters'>
-              <li className='letter'>k</li>
+            {renderSolutionLetters()}
+          
+             
+
+
+
+          {/*     <li className='letter'>k</li>
               <li className='letter'>a</li>
               <li className='letter'></li>
               <li className='letter'>a</li>
@@ -37,7 +51,7 @@ function App() {
               <li className='letter'></li>
               <li className='letter'>k</li>
               <li className='letter'>e</li>
-              <li className='letter'>r</li>
+              <li className='letter'>r</li> */}
             </ul>
           </div>
           <div className='error'>
@@ -84,7 +98,7 @@ function App() {
         </section>
       </main>
     </div>
-  );
+
 }
 
 export default App;
